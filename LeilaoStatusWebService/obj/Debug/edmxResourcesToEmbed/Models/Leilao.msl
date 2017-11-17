@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LeilaoModelStoreContainer" CdmEntityContainer="DBLeilaoEntities1">
+    <EntitySetMapping Name="Leilao">
+      <EntityTypeMapping TypeName="LeilaoModel.Leilao">
+        <MappingFragment StoreEntitySet="Leilao">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Natureza" ColumnName="Natureza" />
+          <ScalarProperty Name="Forma" ColumnName="Forma" />
+          <ScalarProperty Name="DataDeInicio" ColumnName="DataDeInicio" />
+          <ScalarProperty Name="DataDeFim" ColumnName="DataDeFim" />
+          <ScalarProperty Name="LanceMinimo" ColumnName="LanceMinimo" />
+          <ScalarProperty Name="LanceMaximo" ColumnName="LanceMaximo" />
+          <ScalarProperty Name="Lote_ID" ColumnName="Lote_ID" />
+          <ScalarProperty Name="Usuario_ID" ColumnName="Usuario_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lote">
+      <EntityTypeMapping TypeName="LeilaoModel.Lote">
+        <MappingFragment StoreEntitySet="Lote">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produto">
+      <EntityTypeMapping TypeName="LeilaoModel.Produto">
+        <MappingFragment StoreEntitySet="Produto">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BreveDescricao" ColumnName="BreveDescricao" />
+          <ScalarProperty Name="DescricaoCompleta" ColumnName="DescricaoCompleta" />
+          <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+          <ScalarProperty Name="Lote_ID" ColumnName="Lote_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="LeilaoModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+          <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

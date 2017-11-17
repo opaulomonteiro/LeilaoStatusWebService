@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LeilaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Leilao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Natureza" Type="nvarchar(max)" />
+          <Property Name="Forma" Type="nvarchar(max)" />
+          <Property Name="DataDeInicio" Type="datetime" Nullable="false" />
+          <Property Name="DataDeFim" Type="datetime" Nullable="false" />
+          <Property Name="LanceMinimo" Type="float" Nullable="false" />
+          <Property Name="LanceMaximo" Type="float" Nullable="false" />
+          <Property Name="Lote_ID" Type="int" />
+          <Property Name="Usuario_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Lote">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BreveDescricao" Type="nvarchar(max)" />
+          <Property Name="DescricaoCompleta" Type="nvarchar(max)" />
+          <Property Name="Categoria" Type="nvarchar(max)" />
+          <Property Name="Lote_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" />
+          <Property Name="Cpf" Type="nvarchar(max)" />
+          <Property Name="Cnpj" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_Leilao_dbo_Lote_Lote_ID">
+          <End Role="Lote" Type="Self.Lote" Multiplicity="0..1" />
+          <End Role="Leilao" Type="Self.Leilao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lote">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Leilao">
+              <PropertyRef Name="Lote_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Leilao_dbo_Usuario_Usuario_ID">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Leilao" Type="Self.Leilao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Leilao">
+              <PropertyRef Name="Usuario_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Produto_dbo_Lote_Lote_ID">
+          <End Role="Lote" Type="Self.Lote" Multiplicity="0..1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lote">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="Lote_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LeilaoModelStoreContainer">
+          <EntitySet Name="Leilao" EntityType="Self.Leilao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lote" EntityType="Self.Lote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Leilao_dbo_Lote_Lote_ID" Association="Self.FK_dbo_Leilao_dbo_Lote_Lote_ID">
+            <End Role="Lote" EntitySet="Lote" />
+            <End Role="Leilao" EntitySet="Leilao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Leilao_dbo_Usuario_Usuario_ID" Association="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_ID">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Leilao" EntitySet="Leilao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Produto_dbo_Lote_Lote_ID" Association="Self.FK_dbo_Produto_dbo_Lote_Lote_ID">
+            <End Role="Lote" EntitySet="Lote" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LeilaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Leilao">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Natureza" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Forma" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DataDeInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataDeFim" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LanceMinimo" Type="Double" Nullable="false" />
+          <Property Name="LanceMaximo" Type="Double" Nullable="false" />
+          <Property Name="Lote_ID" Type="Int32" />
+          <Property Name="Usuario_ID" Type="Int32" />
+          <NavigationProperty Name="Lote" Relationship="Self.FK_dbo_Leilao_dbo_Lote_Lote_ID" FromRole="Leilao" ToRole="Lote" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_ID" FromRole="Leilao" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Lote">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Leilao" Relationship="Self.FK_dbo_Leilao_dbo_Lote_Lote_ID" FromRole="Lote" ToRole="Leilao" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK_dbo_Produto_dbo_Lote_Lote_ID" FromRole="Lote" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BreveDescricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DescricaoCompleta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Categoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lote_ID" Type="Int32" />
+          <NavigationProperty Name="Lote" Relationship="Self.FK_dbo_Produto_dbo_Lote_Lote_ID" FromRole="Produto" ToRole="Lote" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cpf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cnpj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Leilao" Relationship="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_ID" FromRole="Usuario" ToRole="Leilao" />
+        </EntityType>
+        <Association Name="FK_dbo_Leilao_dbo_Lote_Lote_ID">
+          <End Role="Lote" Type="Self.Lote" Multiplicity="0..1" />
+          <End Role="Leilao" Type="Self.Leilao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lote">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Leilao">
+              <PropertyRef Name="Lote_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Leilao_dbo_Usuario_Usuario_ID">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Leilao" Type="Self.Leilao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Leilao">
+              <PropertyRef Name="Usuario_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Produto_dbo_Lote_Lote_ID">
+          <End Role="Lote" Type="Self.Lote" Multiplicity="0..1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lote">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="Lote_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBLeilaoEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Leilao" EntityType="Self.Leilao" />
+          <EntitySet Name="Lote" EntityType="Self.Lote" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_dbo_Leilao_dbo_Lote_Lote_ID" Association="Self.FK_dbo_Leilao_dbo_Lote_Lote_ID">
+            <End Role="Lote" EntitySet="Lote" />
+            <End Role="Leilao" EntitySet="Leilao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Leilao_dbo_Usuario_Usuario_ID" Association="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_ID">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Leilao" EntitySet="Leilao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Produto_dbo_Lote_Lote_ID" Association="Self.FK_dbo_Produto_dbo_Lote_Lote_ID">
+            <End Role="Lote" EntitySet="Lote" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LeilaoModelStoreContainer" CdmEntityContainer="DBLeilaoEntities1">
+          <EntitySetMapping Name="Leilao">
+            <EntityTypeMapping TypeName="LeilaoModel.Leilao">
+              <MappingFragment StoreEntitySet="Leilao">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Natureza" ColumnName="Natureza" />
+                <ScalarProperty Name="Forma" ColumnName="Forma" />
+                <ScalarProperty Name="DataDeInicio" ColumnName="DataDeInicio" />
+                <ScalarProperty Name="DataDeFim" ColumnName="DataDeFim" />
+                <ScalarProperty Name="LanceMinimo" ColumnName="LanceMinimo" />
+                <ScalarProperty Name="LanceMaximo" ColumnName="LanceMaximo" />
+                <ScalarProperty Name="Lote_ID" ColumnName="Lote_ID" />
+                <ScalarProperty Name="Usuario_ID" ColumnName="Usuario_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lote">
+            <EntityTypeMapping TypeName="LeilaoModel.Lote">
+              <MappingFragment StoreEntitySet="Lote">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="LeilaoModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BreveDescricao" ColumnName="BreveDescricao" />
+                <ScalarProperty Name="DescricaoCompleta" ColumnName="DescricaoCompleta" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Lote_ID" ColumnName="Lote_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="LeilaoModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

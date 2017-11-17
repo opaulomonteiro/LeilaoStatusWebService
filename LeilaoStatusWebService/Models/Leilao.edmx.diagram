@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8dc7186ccc143f4893382f3aae1f723" Name="Diagram1">
+        <EntityTypeShape EntityType="LeilaoModel.Leilao" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeilaoModel.Lote" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeilaoModel.Produto" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LeilaoModel.Usuario" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="LeilaoModel.FK_dbo_Leilao_dbo_Lote_Lote_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="LeilaoModel.FK_dbo_Leilao_dbo_Usuario_Usuario_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="LeilaoModel.FK_dbo_Produto_dbo_Lote_Lote_ID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
