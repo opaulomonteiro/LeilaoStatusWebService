@@ -4,26 +4,26 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LeilaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DBLeilaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Leilao">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="LeilaoID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeilaoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Natureza" Type="nvarchar(max)" />
           <Property Name="Forma" Type="nvarchar(max)" />
           <Property Name="DataDeInicio" Type="datetime" Nullable="false" />
           <Property Name="DataDeFim" Type="datetime" Nullable="false" />
           <Property Name="LanceMinimo" Type="float" Nullable="false" />
           <Property Name="LanceMaximo" Type="float" Nullable="false" />
-          <Property Name="Lote_ID" Type="int" />
-          <Property Name="Usuario_ID" Type="int" />
+          <Property Name="Lote_LoteID" Type="int" />
+          <Property Name="Usuario_UsuarioID" Type="int" />
         </EntityType>
         <EntityType Name="Lote">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="LoteID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Produto">
           <Key>
@@ -33,68 +33,68 @@
           <Property Name="BreveDescricao" Type="nvarchar(max)" />
           <Property Name="DescricaoCompleta" Type="nvarchar(max)" />
           <Property Name="Categoria" Type="nvarchar(max)" />
-          <Property Name="Lote_ID" Type="int" />
+          <Property Name="Lote_LoteID" Type="int" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="UsuarioID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="nvarchar(max)" />
           <Property Name="Cpf" Type="nvarchar(max)" />
           <Property Name="Cnpj" Type="nvarchar(max)" />
           <Property Name="Email" Type="nvarchar(max)" />
         </EntityType>
-        <Association Name="FK_dbo_Leilao_dbo_Lote_Lote_ID">
+        <Association Name="FK_dbo_Leilao_dbo_Lote_Lote_LoteID">
           <End Role="Lote" Type="Self.Lote" Multiplicity="0..1" />
           <End Role="Leilao" Type="Self.Leilao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lote">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="LoteID" />
             </Principal>
             <Dependent Role="Leilao">
-              <PropertyRef Name="Lote_ID" />
+              <PropertyRef Name="Lote_LoteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Leilao_dbo_Usuario_Usuario_ID">
+        <Association Name="FK_dbo_Leilao_dbo_Usuario_Usuario_UsuarioID">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Leilao" Type="Self.Leilao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="UsuarioID" />
             </Principal>
             <Dependent Role="Leilao">
-              <PropertyRef Name="Usuario_ID" />
+              <PropertyRef Name="Usuario_UsuarioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Produto_dbo_Lote_Lote_ID">
+        <Association Name="FK_dbo_Produto_dbo_Lote_Lote_LoteID">
           <End Role="Lote" Type="Self.Lote" Multiplicity="0..1" />
           <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lote">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="LoteID" />
             </Principal>
             <Dependent Role="Produto">
-              <PropertyRef Name="Lote_ID" />
+              <PropertyRef Name="Lote_LoteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LeilaoModelStoreContainer">
+        <EntityContainer Name="DBLeilaoModelStoreContainer">
           <EntitySet Name="Leilao" EntityType="Self.Leilao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lote" EntityType="Self.Lote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_dbo_Leilao_dbo_Lote_Lote_ID" Association="Self.FK_dbo_Leilao_dbo_Lote_Lote_ID">
+          <AssociationSet Name="FK_dbo_Leilao_dbo_Lote_Lote_LoteID" Association="Self.FK_dbo_Leilao_dbo_Lote_Lote_LoteID">
             <End Role="Lote" EntitySet="Lote" />
             <End Role="Leilao" EntitySet="Leilao" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Leilao_dbo_Usuario_Usuario_ID" Association="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_ID">
+          <AssociationSet Name="FK_dbo_Leilao_dbo_Usuario_Usuario_UsuarioID" Association="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_UsuarioID">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Leilao" EntitySet="Leilao" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Produto_dbo_Lote_Lote_ID" Association="Self.FK_dbo_Produto_dbo_Lote_Lote_ID">
+          <AssociationSet Name="FK_dbo_Produto_dbo_Lote_Lote_LoteID" Association="Self.FK_dbo_Produto_dbo_Lote_Lote_LoteID">
             <End Role="Lote" EntitySet="Lote" />
             <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
@@ -103,30 +103,30 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="LeilaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DBLeilaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Leilao">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="LeilaoID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeilaoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Natureza" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Forma" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DataDeInicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataDeFim" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LanceMinimo" Type="Double" Nullable="false" />
           <Property Name="LanceMaximo" Type="Double" Nullable="false" />
-          <Property Name="Lote_ID" Type="Int32" />
-          <Property Name="Usuario_ID" Type="Int32" />
-          <NavigationProperty Name="Lote" Relationship="Self.FK_dbo_Leilao_dbo_Lote_Lote_ID" FromRole="Leilao" ToRole="Lote" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_ID" FromRole="Leilao" ToRole="Usuario" />
+          <Property Name="Lote_LoteID" Type="Int32" />
+          <Property Name="Usuario_UsuarioID" Type="Int32" />
+          <NavigationProperty Name="Lote" Relationship="Self.FK_dbo_Leilao_dbo_Lote_Lote_LoteID" FromRole="Leilao" ToRole="Lote" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_UsuarioID" FromRole="Leilao" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Lote">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="LoteID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Leilao" Relationship="Self.FK_dbo_Leilao_dbo_Lote_Lote_ID" FromRole="Lote" ToRole="Leilao" />
-          <NavigationProperty Name="Produto" Relationship="Self.FK_dbo_Produto_dbo_Lote_Lote_ID" FromRole="Lote" ToRole="Produto" />
+          <Property Name="LoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Leilao" Relationship="Self.FK_dbo_Leilao_dbo_Lote_Lote_LoteID" FromRole="Lote" ToRole="Leilao" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK_dbo_Produto_dbo_Lote_Lote_LoteID" FromRole="Lote" ToRole="Produto" />
         </EntityType>
         <EntityType Name="Produto">
           <Key>
@@ -136,70 +136,70 @@
           <Property Name="BreveDescricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DescricaoCompleta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Categoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Lote_ID" Type="Int32" />
-          <NavigationProperty Name="Lote" Relationship="Self.FK_dbo_Produto_dbo_Lote_Lote_ID" FromRole="Produto" ToRole="Lote" />
+          <Property Name="Lote_LoteID" Type="Int32" />
+          <NavigationProperty Name="Lote" Relationship="Self.FK_dbo_Produto_dbo_Lote_Lote_LoteID" FromRole="Produto" ToRole="Lote" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="UsuarioID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Cpf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Cnpj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Leilao" Relationship="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_ID" FromRole="Usuario" ToRole="Leilao" />
+          <NavigationProperty Name="Leilao" Relationship="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_UsuarioID" FromRole="Usuario" ToRole="Leilao" />
         </EntityType>
-        <Association Name="FK_dbo_Leilao_dbo_Lote_Lote_ID">
+        <Association Name="FK_dbo_Leilao_dbo_Lote_Lote_LoteID">
           <End Role="Lote" Type="Self.Lote" Multiplicity="0..1" />
           <End Role="Leilao" Type="Self.Leilao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lote">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="LoteID" />
             </Principal>
             <Dependent Role="Leilao">
-              <PropertyRef Name="Lote_ID" />
+              <PropertyRef Name="Lote_LoteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Leilao_dbo_Usuario_Usuario_ID">
+        <Association Name="FK_dbo_Leilao_dbo_Usuario_Usuario_UsuarioID">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Leilao" Type="Self.Leilao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="UsuarioID" />
             </Principal>
             <Dependent Role="Leilao">
-              <PropertyRef Name="Usuario_ID" />
+              <PropertyRef Name="Usuario_UsuarioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Produto_dbo_Lote_Lote_ID">
+        <Association Name="FK_dbo_Produto_dbo_Lote_Lote_LoteID">
           <End Role="Lote" Type="Self.Lote" Multiplicity="0..1" />
           <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lote">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="LoteID" />
             </Principal>
             <Dependent Role="Produto">
-              <PropertyRef Name="Lote_ID" />
+              <PropertyRef Name="Lote_LoteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBLeilaoEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DBLeilaoEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Leilao" EntityType="Self.Leilao" />
           <EntitySet Name="Lote" EntityType="Self.Lote" />
           <EntitySet Name="Produto" EntityType="Self.Produto" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK_dbo_Leilao_dbo_Lote_Lote_ID" Association="Self.FK_dbo_Leilao_dbo_Lote_Lote_ID">
+          <AssociationSet Name="FK_dbo_Leilao_dbo_Lote_Lote_LoteID" Association="Self.FK_dbo_Leilao_dbo_Lote_Lote_LoteID">
             <End Role="Lote" EntitySet="Lote" />
             <End Role="Leilao" EntitySet="Leilao" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Leilao_dbo_Usuario_Usuario_ID" Association="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_ID">
+          <AssociationSet Name="FK_dbo_Leilao_dbo_Usuario_Usuario_UsuarioID" Association="Self.FK_dbo_Leilao_dbo_Usuario_Usuario_UsuarioID">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Leilao" EntitySet="Leilao" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Produto_dbo_Lote_Lote_ID" Association="Self.FK_dbo_Produto_dbo_Lote_Lote_ID">
+          <AssociationSet Name="FK_dbo_Produto_dbo_Lote_Lote_LoteID" Association="Self.FK_dbo_Produto_dbo_Lote_Lote_LoteID">
             <End Role="Lote" EntitySet="Lote" />
             <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
@@ -209,44 +209,44 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LeilaoModelStoreContainer" CdmEntityContainer="DBLeilaoEntities1">
+        <EntityContainerMapping StorageEntityContainer="DBLeilaoModelStoreContainer" CdmEntityContainer="DBLeilaoEntities">
           <EntitySetMapping Name="Leilao">
-            <EntityTypeMapping TypeName="LeilaoModel.Leilao">
+            <EntityTypeMapping TypeName="DBLeilaoModel.Leilao">
               <MappingFragment StoreEntitySet="Leilao">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LeilaoID" ColumnName="LeilaoID" />
                 <ScalarProperty Name="Natureza" ColumnName="Natureza" />
                 <ScalarProperty Name="Forma" ColumnName="Forma" />
                 <ScalarProperty Name="DataDeInicio" ColumnName="DataDeInicio" />
                 <ScalarProperty Name="DataDeFim" ColumnName="DataDeFim" />
                 <ScalarProperty Name="LanceMinimo" ColumnName="LanceMinimo" />
                 <ScalarProperty Name="LanceMaximo" ColumnName="LanceMaximo" />
-                <ScalarProperty Name="Lote_ID" ColumnName="Lote_ID" />
-                <ScalarProperty Name="Usuario_ID" ColumnName="Usuario_ID" />
+                <ScalarProperty Name="Lote_LoteID" ColumnName="Lote_LoteID" />
+                <ScalarProperty Name="Usuario_UsuarioID" ColumnName="Usuario_UsuarioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Lote">
-            <EntityTypeMapping TypeName="LeilaoModel.Lote">
+            <EntityTypeMapping TypeName="DBLeilaoModel.Lote">
               <MappingFragment StoreEntitySet="Lote">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LoteID" ColumnName="LoteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Produto">
-            <EntityTypeMapping TypeName="LeilaoModel.Produto">
+            <EntityTypeMapping TypeName="DBLeilaoModel.Produto">
               <MappingFragment StoreEntitySet="Produto">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BreveDescricao" ColumnName="BreveDescricao" />
                 <ScalarProperty Name="DescricaoCompleta" ColumnName="DescricaoCompleta" />
                 <ScalarProperty Name="Categoria" ColumnName="Categoria" />
-                <ScalarProperty Name="Lote_ID" ColumnName="Lote_ID" />
+                <ScalarProperty Name="Lote_LoteID" ColumnName="Lote_LoteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="LeilaoModel.Usuario">
+            <EntityTypeMapping TypeName="DBLeilaoModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Cpf" ColumnName="Cpf" />
                 <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />

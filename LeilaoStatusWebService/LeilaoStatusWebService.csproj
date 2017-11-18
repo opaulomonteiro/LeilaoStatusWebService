@@ -132,7 +132,7 @@
     <Content Include="Models\Leilao.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Leilao.edmx</DependentUpon>
-      <LastGenOutput>Leilao1.cs</LastGenOutput>
+      <LastGenOutput>Leilao2.cs</LastGenOutput>
     </Content>
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
@@ -159,6 +159,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Leilao.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Leilao2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Leilao.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Lote.cs">
       <DependentUpon>Leilao.tt</DependentUpon>

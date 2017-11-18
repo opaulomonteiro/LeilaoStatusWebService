@@ -21,7 +21,7 @@ namespace LeilaoStatusWebService.Models
             this.Leilao = new HashSet<Leilao>();
         }
     
-        public int ID { get; set; }
+        public int UsuarioID { get; set; }
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Cnpj { get; set; }

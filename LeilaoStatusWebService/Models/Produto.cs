@@ -18,7 +18,7 @@ namespace LeilaoStatusWebService.Models
         public string BreveDescricao { get; set; }
         public string DescricaoCompleta { get; set; }
         public string Categoria { get; set; }
-        public Nullable<int> Lote_ID { get; set; }
+        public Nullable<int> Lote_LoteID { get; set; }
     
         public virtual Lote Lote { get; set; }
     }

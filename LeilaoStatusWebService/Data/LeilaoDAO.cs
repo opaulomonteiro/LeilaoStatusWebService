@@ -12,7 +12,7 @@ namespace LeilaoStatusWebService.Data
         {
             try
             {
-                using (var contexto = new DBLeilaoEntities1())
+                using (var contexto = new DBLeilaoEntities())
                 {
                     //fazendo load das entidades filhas
                     var leiloes = contexto.Leilao
@@ -33,13 +33,13 @@ namespace LeilaoStatusWebService.Data
         {
             try
             {
-                using (var contexto = new DBLeilaoEntities1())
+                using (var contexto = new DBLeilaoEntities())
                 {
                     var leilao = contexto.Leilao
                       .Include("Lote.Produto")
                       .Include("Usuario")
                       .ToList()
-                      .Find(l => l.ID.Equals(id));
+                      .Find(l => l.LeilaoID.Equals(id));
                     return leilao;
                 }
             }

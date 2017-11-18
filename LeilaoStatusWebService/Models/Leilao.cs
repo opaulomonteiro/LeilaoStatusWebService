@@ -9,20 +9,23 @@
 
 namespace LeilaoStatusWebService.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Leilao
     {
-        public int ID { get; set; }
+        public int LeilaoID { get; set; }
         public string Natureza { get; set; }
         public string Forma { get; set; }
         public System.DateTime DataDeInicio { get; set; }
         public System.DateTime DataDeFim { get; set; }
         public double LanceMinimo { get; set; }
         public double LanceMaximo { get; set; }
-        public Nullable<int> Lote_ID { get; set; }
-        public Nullable<int> Usuario_ID { get; set; }
+        [JsonIgnore]
+        public Nullable<int> Lote_LoteID { get; set; }
+        [JsonIgnore]
+        public Nullable<int> Usuario_UsuarioID { get; set; }
     
         public virtual Lote Lote { get; set; }
         public virtual Usuario Usuario { get; set; }

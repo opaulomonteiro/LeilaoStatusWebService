@@ -22,7 +22,7 @@ namespace LeilaoStatusWebService.Models
             this.Produto = new HashSet<Produto>();
         }
     
-        public int ID { get; set; }
+        public int LoteID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]

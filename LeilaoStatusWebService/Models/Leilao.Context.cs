@@ -13,10 +13,10 @@ namespace LeilaoStatusWebService.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBLeilaoEntities1 : DbContext
+    public partial class DBLeilaoEntities : DbContext
     {
-        public DBLeilaoEntities1()
-            : base("name=DBLeilaoEntities1")
+        public DBLeilaoEntities()
+            : base("name=DBLeilaoEntities")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
